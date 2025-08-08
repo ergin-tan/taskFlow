@@ -1,0 +1,92 @@
+# IDE and Editor specific
+.vscode/
+.idea/
+.vs/
+*.sln.dotsettings
+*.suo
+*.user
+*.userosscache
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# .NET Core / VS
+# Ignore build output directories
+/Backend/**/[Bb]in/
+/Backend/**/[Oo]bj/
+
+# Ignore other Visual Studio files
+*.userprefs
+*.vspscc
+*.vssscc
+*.pidb
+*.scc
+*.pdb
+*.ilk
+*.tlog
+TestResults/
+
+# Ignore local settings files
+appsettings.Development.json
+
+# Node.js / Frontend
+# Ignore dependency directories
+/Frontend/node_modules/
+
+# Ignore build output directory
+/Frontend/dist/
+
+# Ignore log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Ignore environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+# Ignore override files to avoid committing local configurations
+docker-compose.override.yml
+
+# Database files (good practice to keep)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+<<<<<<< HEAD
+*.mdf
+*.ldf
+=======
+
+# Logs
+logs/
+*.log
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Application specific
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json 
+>>>>>>> 998e317d82bdf3421103ce282a5f87ae5d4e1274
