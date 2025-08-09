@@ -20,9 +20,18 @@ namespace TaskFlow.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] int? userId = null)
         {
-            var workTasks = await _workTaskService.GetAllAsync();
+            IEnumerable<WorkTask> workTasks;
+            if (userId.HasValue)
+            {
+                workTasks = await _workTaskService.FindAsync(wt => wt.AssignedBy == userId.Value);
+            }
+            else
+            {
+                workTasks = await _workTaskService.GetAllAsync();
+            }
+            
             var workTaskDtos = _mapper.Map<List<WorkTaskResponseDto>>(workTasks);
             return Ok(workTaskDtos);
         }

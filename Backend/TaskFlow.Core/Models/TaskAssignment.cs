@@ -19,7 +19,7 @@ public class TaskAssignment: BaseEntity
 
     public string? Remarks { get; set; }
 
-    // Navigation
+    // Navigations
     public WorkTask? WorkTask { get; set; }
     public User? AssignedToUser { get; set; }
 }

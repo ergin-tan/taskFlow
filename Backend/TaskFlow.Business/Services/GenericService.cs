@@ -27,12 +27,17 @@ namespace TaskFlow.Business.Services
 
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _unitOfWork.GetRepository<T>().GetAllAsync();
+            return await GetAllAsync(Array.Empty<Expression<Func<T, object>>>());
         }
 
-        public virtual async Task<T?> GetByIdAsync(int id)
+        public virtual async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
         {
-            return await _unitOfWork.GetRepository<T>().GetByIdAsync(id);
+            return await _unitOfWork.GetRepository<T>().GetAllAsync(includes);
+        }
+
+        public virtual async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
+        {
+            return await _unitOfWork.GetRepository<T>().GetByIdAsync(id, includes);
         }
 
         public virtual async Task Remove(T entity)

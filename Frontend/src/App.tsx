@@ -1,9 +1,12 @@
+import { BrowserRouter as Router } from 'react-router-dom';
+import Layout from './Layout';
+
 function App() {
   return (
-    <>
-      <h1>TaskFlow</h1>
-    </>
-  )
+    <Router>
+      <Layout />
+    </Router>
+  );
 }
 
-export default App
+export default App;

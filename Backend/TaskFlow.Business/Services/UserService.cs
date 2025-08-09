@@ -17,6 +17,11 @@ namespace TaskFlow.Business.Services
             return (await _unitOfWork.GetRepository<User>().FindAsync(u => u.EmployeeID == employeeID)).FirstOrDefault();
         }
 
+        public override async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await base.GetAllAsync(u => u.Office);
+        }
+
         public override async Task AddAsync(User entity)
         {
             if (!string.IsNullOrEmpty(entity.PasswordHash))
