@@ -8,8 +8,6 @@ interface UserProfile {
   employeeID: string;
   title: string;
   officeName: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 const Profile: React.FC = () => {
@@ -34,8 +32,6 @@ const Profile: React.FC = () => {
         <p><strong>Employee ID:</strong> {user.employeeID}</p>
         <p><strong>Title:</strong> {user.title}</p>
         <p><strong>Office:</strong> {user.officeName}</p>
-        <p><strong>Member Since:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
-        <p><strong>Last Updated:</strong> {new Date(user.updatedAt).toLocaleDateString()}</p>
       </div>
     </div>
   );

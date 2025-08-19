@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { useTheme } from '../../contexts/ThemeContext';
+import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
 
 interface NavbarProps {
   onLogout: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onLogout }) => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <header className="navbar">
       <div className="navbar-content">
@@ -22,6 +26,13 @@ const Navbar: React.FC<NavbarProps> = ({ onLogout }) => {
             <span className="link-icon">📋</span>
             <span className="link-text">My Works</span>
           </Link>
+          <button onClick={toggleTheme} className="nav-link theme-toggle-button">
+            {theme === 'dark' ? (
+              <BsFillSunFill className="theme-icon sun-icon" />
+            ) : (
+              <BsFillMoonFill className="theme-icon moon-icon" />
+            )}
+          </button>
           <button onClick={onLogout} className="nav-link logout-button">
             <span className="link-icon">🚪</span>
             <span className="link-text">Logout</span>

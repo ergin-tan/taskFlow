@@ -20,9 +20,9 @@ namespace TaskFlow.Business.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
-            return await _unitOfWork.GetRepository<T>().FindAsync(predicate);
+            return await _unitOfWork.GetRepository<T>().FindAsync(predicate, includes);
         }
 
         public virtual async Task<IEnumerable<T>> GetAllAsync()
@@ -38,6 +38,11 @@ namespace TaskFlow.Business.Services
         public virtual async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
         {
             return await _unitOfWork.GetRepository<T>().GetByIdAsync(id, includes);
+        }
+
+        public virtual async Task<T?> GetByIdAsNoTrackingAsync(int id, params Expression<Func<T, object>>[] includes)
+        {
+            return await _unitOfWork.GetRepository<T>().GetByIdAsNoTrackingAsync(id, includes);
         }
 
         public virtual async Task Remove(T entity)

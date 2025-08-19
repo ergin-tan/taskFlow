@@ -25,7 +25,7 @@ namespace TaskFlow.API.Controllers
             IEnumerable<WorkTask> workTasks;
             if (userId.HasValue)
             {
-                workTasks = await _workTaskService.FindAsync(wt => wt.AssignedBy == userId.Value);
+                workTasks = await _workTaskService.FindAsync(wt => wt.AssignedBy == userId.Value, wt => wt.AssignedByUser);
             }
             else
             {
@@ -39,7 +39,7 @@ namespace TaskFlow.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var workTask = await _workTaskService.GetByIdAsync(id);
+            var workTask = await _workTaskService.GetByIdAsync(id, wt => wt.AssignedByUser);
             if (workTask == null)
             {
                 return NotFound();

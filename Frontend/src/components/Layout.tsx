@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import Login from './Login';
-import Navbar from './Navbar';
-import Profile from './Profile';
-import MyWorks from './MyWorks';
+import Dashboard from '../pages/Dashboard/Dashboard';
+import Login from '../pages/Login/Login';
+import Navbar from './Navbar/Navbar';
+import Profile from '../pages/Profile/Profile';
+import MyWorks from '../pages/MyWorks/MyWorks';
+import TaskDetail from '../pages/TaskDetail/TaskDetail';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -29,7 +30,6 @@ const Layout: React.FC = () => {
 
   const isAuthenticated = () => {
     const token = localStorage.getItem('token');
-    console.log('isAuthenticated check: Token is', token ? 'present' : 'absent');
     return token !== null;
   };
 
@@ -51,6 +51,10 @@ const Layout: React.FC = () => {
         <Route
           path="/my-works"
           element={isAuthenticated() ? <MyWorks /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/task/:taskId"
+          element={isAuthenticated() ? <TaskDetail /> : <Navigate to="/login" replace />}
         />
         <Route path="*" element={<Navigate to="/login" replace />} /> 
       </Routes>

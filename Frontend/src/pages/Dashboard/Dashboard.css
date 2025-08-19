@@ -1,8 +1,17 @@
+:root {
+    --card-bg-color: #2c2f33;
+    --background-color: #1e1e1e;
+    --navbar-hover-color: #4f545c;
+    --text-color: #ffffff;
+    --secondary-color: #b9bbbe;
+    --border-color: #4a4d52;
+}
+
 .dashboard-container {
-    max-width: 1200px;
+    width: 90%;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: #1f1f1f;
+    background-color: var(--card-bg-color);
     border-radius: 1rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
@@ -24,12 +33,12 @@
     font-weight: 600;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #333333;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 0.5rem;
 }
 
 .dashboard-container p {
-    color: #b0b0b0;
+    color: var(--secondary-color);
     font-style: italic;
     text-align: center;
     margin-top: 1rem;
@@ -43,33 +52,33 @@ table {
 }
 
 thead {
-    background-color: #333333;
-    color: #ffffff;
+    background-color: var(--navbar-hover-color);
+    color: var(--text-color);
 }
 
 th, td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid #2c2c2c;
+    border-bottom: 1px solid var(--border-color);
     word-wrap: break-word;
 }
 
 tbody tr {
-    background-color: #1f1f1f;
+    background-color: var(--card-bg-color);
     transition: background-color 0.2s ease;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #252525;
+    background-color: var(--background-color);
 }
 
 tbody tr:hover {
-    background-color: #333333;
+    background-color: var(--navbar-hover-color);
     cursor: pointer;
 }
 
 td {
-    color: #b0b0b0;
+    color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
@@ -90,14 +99,14 @@ td {
     }
 
     tr {
-        border: 1px solid #333;
+        border: 1px solid var(--border-color);
         margin-bottom: 1rem;
         border-radius: 0.5rem;
     }
 
     td {
         border: none;
-        border-bottom: 1px solid #333333;
+        border-bottom: 1px solid var(--border-color);
         position: relative;
         padding-left: 50%;
         text-align: right;
@@ -112,7 +121,7 @@ td {
         white-space: nowrap;
         text-align: left;
         font-weight: 600;
-        color: #e0e0e0;
+        color: var(--text-color);
     }
 
     td:nth-of-type(1):before { content: "ID:"; }

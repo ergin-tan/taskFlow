@@ -31,11 +31,7 @@ namespace TaskFlow.API.Mapping
                 .ReverseMap();
             CreateMap<TaskAssignmentRequestDto, TaskAssignment>();
 
-            CreateMap<TaskHistory, TaskHistoryResponseDto>()
-                .ForMember(dest => dest.WorkTaskTitle, opt => opt.MapFrom(src => src.WorkTask != null ? src.WorkTask.TaskTitle : null))
-                .ForMember(dest => dest.ChangedByUserName, opt => opt.MapFrom(src => src.ChangedByUser != null ? src.ChangedByUser.FirstName + " " + src.ChangedByUser.LastName : null))
-                .ReverseMap();
-            CreateMap<TaskHistoryRequestDto, TaskHistory>();
+            CreateMap<AuditLog, AuditLogResponseDto>().ReverseMap();
         }
     }
 }

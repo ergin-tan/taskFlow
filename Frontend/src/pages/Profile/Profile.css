@@ -3,15 +3,15 @@ body {
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 .profile-container {
     max-width: 800px;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: #1f1f1f;
+    background-color: var(--card-bg-color);
     border-radius: 1rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     text-align: center;
@@ -33,7 +33,7 @@ body {
     flex-direction: column;
     gap: 1rem;
     text-align: left;
-    background-color: #252525;
+    background-color: var(--background-color);
     padding: 2rem;
     border-radius: 0.75rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -42,7 +42,7 @@ body {
 .profile-details p {
     margin: 0;
     padding: 0.75rem;
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s ease;
 }
 
@@ -51,11 +51,11 @@ body {
 }
 
 .profile-details p:hover {
-    background-color: #333333;
+    background-color: var(--navbar-hover-color);
 }
 
 .profile-details strong {
-    color: #ffffff;
+    color: var(--text-color);
     min-width: 150px;
     display: inline-block;
 }

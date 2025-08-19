@@ -19,7 +19,7 @@ namespace TaskFlow.Core.Models
 
         public bool IsArchived { get; set; } = false;
         public User? AssignedByUser { get; set; }
-        public ICollection<TaskHistory> History { get; set; } = new List<TaskHistory>();
+        
         public ICollection<TaskAssignment> Assignments { get; set; } = new List<TaskAssignment>();
     }
 }

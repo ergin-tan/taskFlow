@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './Dashboard.css'; // Import the CSS file
+import './Dashboard.css';
+import AuditLogTable from '../../components/AuditLogTable';
 
 interface User {
   id: number;
@@ -33,28 +34,29 @@ interface TaskAssignment {
   remarks?: string;
 }
 
-interface TaskHistory {
-  id: number;
-  workTaskId: number;
-  workTaskTitle: string;
-  changedByUserId: number;
-  changedByUserName: string;
-  oldStatus?: string;
-  newStatus: string;
-  changeDescription?: string;
-}
 
 interface Office {
   id: number;
   officeName: string;
 }
 
+interface AuditLog {
+  id: number;
+  tableName: string;
+  action: string;
+  timestamp: string;
+  userId: number | null;
+  oldValues: string | null;
+  newValues: string | null;
+  primaryKey: string;
+}
+
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [workTasks, setWorkTasks] = useState<WorkTask[]>([]);
   const [taskAssignments, setTaskAssignments] = useState<TaskAssignment[]>([]);
-  const [taskHistories, setTaskHistories] = useState<TaskHistory[]>([]);
   const [offices, setOffices] = useState<Office[]>([]);
+  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -87,14 +89,6 @@ const Dashboard: React.FC = () => {
         const taskAssignmentsData: TaskAssignment[] = await taskAssignmentsResponse.json();
         setTaskAssignments(taskAssignmentsData);
 
-        // Fetch Task Histories
-        const taskHistoriesResponse = await fetch(`${API_BASE_URL}/api/taskhistories`);
-        if (!taskHistoriesResponse.ok) {
-          throw new Error(`HTTP error! status: ${taskHistoriesResponse.status} for task histories`);
-        }
-        const taskHistoriesData: TaskHistory[] = await taskHistoriesResponse.json();
-        setTaskHistories(taskHistoriesData);
-
         // Fetch Offices
         const officesResponse = await fetch(`${API_BASE_URL}/api/offices`);
         if (!officesResponse.ok) {
@@ -102,6 +96,14 @@ const Dashboard: React.FC = () => {
         }
         const officesData: Office[] = await officesResponse.json();
         setOffices(officesData);
+
+        // Fetch Audit Logs
+        const auditLogsResponse = await fetch(`${API_BASE_URL}/api/auditlogs`);
+        if (!auditLogsResponse.ok) {
+          throw new Error(`HTTP error! status: ${auditLogsResponse.status} for audit logs`);
+        }
+        const auditLogsData: AuditLog[] = await auditLogsResponse.json();
+        setAuditLogs(auditLogsData);
 
       } catch (err: any) {
         setError(err.message);
@@ -217,36 +219,6 @@ const Dashboard: React.FC = () => {
         </table>
       )}
 
-      <h2>Task Histories</h2>
-      {taskHistories.length === 0 ? (
-        <p>No task histories found.</p>
-      ) : (
-        <table style={{ width: '100%' }}>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Work Task</th>
-              <th>Changed By</th>
-              <th>Old Status</th>
-              <th>New Status</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {taskHistories.map((history) => (
-              <tr key={history.id}>
-                <td>{history.id}</td>
-                <td>{history.workTaskTitle}</td>
-                <td>{history.changedByUserName}</td>
-                <td>{history.oldStatus || 'N/A'}</td>
-                <td>{history.newStatus}</td>
-                <td>{history.changeDescription || 'N/A'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
       <h2>Offices</h2>
       {offices.length === 0 ? (
         <p>No offices found.</p>
@@ -268,6 +240,9 @@ const Dashboard: React.FC = () => {
           </tbody>
         </table>
       )}
+
+      <AuditLogTable auditLogs={auditLogs} />
+
     </div>
   );
 };

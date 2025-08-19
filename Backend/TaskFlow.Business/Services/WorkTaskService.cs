@@ -16,5 +16,18 @@ namespace TaskFlow.Business.Services
         {
             return await base.GetAllAsync(wt => wt.AssignedByUser);
         }
+
+        public override async Task Update(WorkTask entity)
+        {
+            var originalTask = await GetByIdAsNoTrackingAsync(entity.Id);
+
+            if (originalTask != null)
+            {
+                int changedByUserId = entity.AssignedBy; 
+                entity.AssignedBy = originalTask.AssignedBy;
+            }
+
+            await base.Update(entity);
+        }
     }
 }

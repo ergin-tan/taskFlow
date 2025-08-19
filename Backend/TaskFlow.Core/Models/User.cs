@@ -20,6 +20,6 @@ namespace TaskFlow.Core.Models
         public bool IsActive { get; set; } = true;
         public Office? Office { get; set; }
 
-        public ICollection<TaskHistory> TaskHistoryEntries { get; set; } = new List<TaskHistory>();
+        
     }
 }
